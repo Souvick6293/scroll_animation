@@ -1,0 +1,367 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+:root {
+  --primary-purple: #814ac8;
+  --dark-purple: #6e32e1;
+  --text-dark: #2e2735;
+  --text-gray: #67626c;
+  --bg-light: #fafafe;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-light);
+}
+
+.cp-wrapper {
+  background: var(--bg-light);
+  width: 100%;
+  /* Removed overflow-x: hidden because it completely breaks position: sticky on children */
+}
+
+/* --- Hero Text Section --- */
+.cp-header-section {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px;
+  background-color: #fff;
+  position: relative;
+  z-index: 20;
+}
+
+.cp-header-content {
+  max-width: 1100px;
+  text-align: center;
+}
+
+.cp-heading {
+  color: var(--text-dark);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  margin: 0 0 32px;
+  line-height: 1.1;
+}
+
+.cp-subtext {
+  color: var(--text-gray);
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 300;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* --- Purple Parallax Section --- */
+.cp-scroll-section {
+  position: relative;
+  width: 100%;
+  height: 400vh; /* Reduced from 1000vh for snappier scrolling */
+  cursor: none; /* Hide default cursor when in this section */
+}
+
+.cp-sticky-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+  overflow: hidden;
+}
+
+/* Pink Progress Bar */
+.cp-progress-bar {
+  position: absolute; /* or fixed if we want it always visible */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #e968c1; /* Matches the pink color from the reference */
+  z-index: 9999;
+  transform-origin: left;
+}
+
+/* Continuous Floating Animations */
+@keyframes ccW {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  25% { transform: translate(3px, -5px) rotate(0.5deg); }
+  50% { transform: translate(-2px, 3px) rotate(-0.3deg); }
+  75% { transform: translate(4px, 2px) rotate(0.4deg); }
+}
+
+@keyframes ccF {
+  0%, 100% { transform: rotate(6.91deg) translate(0, 0); }
+  25% { transform: rotate(7.6deg) translate(-4px, 3px); }
+  50% { transform: rotate(6.2deg) translate(3px, -4px); }
+  75% { transform: rotate(7.3deg) translate(-2px, -3px); }
+}
+
+.float-animation-1 {
+  animation: ccW 8s ease-in-out infinite;
+}
+
+.float-animation-2 {
+  animation: ccW 12s ease-in-out infinite reverse;
+}
+
+.cp-background-text {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: clamp(3rem, 10vw, 8rem);
+  color: #fff;
+  font-weight: 300;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Wavy Background Line */
+.cp-bg-line {
+  position: absolute;
+  top: 45%;
+  left: -5%;
+  width: 110%;
+  height: auto;
+  pointer-events: none;
+  opacity: 0.3;
+  z-index: 2;
+}
+
+/* Custom Cursor */
+.cp-custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+  z-index: 1000;
+  pointer-events: none; /* Must not block clicks or hover events below it */
+}
+
+.cp-scroll-bubble {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Floating Cards */
+.parallax-card-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.parallax-card-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  will-change: transform;
+}
+
+.parallax-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Phase 2: Services List */
+.ccs-svc-list {
+  position: absolute;
+  left: 5vw;
+  top: 4vh;
+  bottom: 6vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: min(48px, 4.5vh);
+  z-index: 5;
+  width: 50vw;
+}
+
+.ccs-svc-item {
+  position: relative;
+}
+
+.ccs-svc-title {
+  font-weight: 300;
+  font-size: clamp(42px, 8vw, 120px);
+  line-height: 0.75;
+  text-transform: uppercase;
+  text-align: left;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.ccs-svc-subtext {
+  font-weight: 300;
+  font-size: clamp(14px, 1.6vw, 26px);
+  line-height: 1.3;
+  text-align: left;
+  color: #fff;
+  margin-top: 1.2vh;
+}
+
+.ccs-svc-media {
+  position: absolute;
+  right: 3vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(42vw, 610px);
+  height: min(60vh, 622px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.ccs-svc-media-inner {
+  width: 90%;
+  height: 92%;
+  border-radius: min(15px, 1vw);
+  overflow: hidden;
+  transform: rotate(6.91deg);
+  box-shadow: 0 .5vw 1vw rgba(0,25,70,.12), 0 1.3vw 2.7vw rgba(5,16,36,.18);
+  position: relative;
+}
+
+/* Phase 3/4: Skull / Momentum / CTA */
+.ccs-skull-layer {
+  position: absolute;
+  inset: 0px;
+  z-index: 20;
+  background: rgb(113, 63, 221);
+  pointer-events: auto;
+}
+
+.ccs-skull-vid-wrap {
+  position: absolute;
+  inset: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: perspective(800px) scale(2.5);
+}
+
+.ccs-skull-momentum {
+  position: absolute;
+  top: 69%;
+  left: 5vw;
+  right: 5vw;
+  transform: translateY(-50%);
+  text-align: center;
+  z-index: 10;
+}
+
+.ccs-momentum-text {
+  font-weight: 400;
+  font-size: clamp(32px, 4.86vw, 70px);
+  letter-spacing: 1.4px;
+  line-height: 1.1;
+  margin: 0;
+  color: #fff;
+  text-shadow: 2px 2px 61.9px #201C78, 2px 2px 61.9px #6E32E1;
+}
+
+.ccs-final-cta {
+  position: absolute;
+  top: 50%;
+  left: 5vw;
+  right: 5vw;
+  text-align: center;
+  z-index: 12;
+  transform: translateY(-50%);
+}
+
+.ccs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 5.5vh;
+  height: 64px;
+  padding: 12px 24px 13px;
+  box-sizing: border-box;
+  border-radius: 32px;
+  border: 2px solid white;
+  background: transparent;
+  color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+
+.ccs-btn:hover {
+  background: #fff;
+  color: var(--primary-purple);
+}
+
+.ccs-btn:hover svg path {
+  fill: var(--primary-purple);
+}
+
+/* W. Nominee Badge */
+.cp-nominee-badge {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #fff;
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  padding: 24px 12px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+@media (max-width: 768px) {
+  .cp-scroll-bubble-container {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+  }
+  .cp-scroll-bubble {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-card { transition: none !important; }
+}
